@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDSC Dev Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Slide-in from right for the entire form */
+.animated-form {
+    opacity: 0;
+    animation: slideInRight 1s ease-out forwards;
+}
+
+/* Slide-in from right animation keyframes */
+@keyframes slideInRight {
+    0% {
+        transform: translateX(10);  /* Start off-screen to the right */
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);  /* End at the original position */
+        opacity: 1;
+    }
+}
+
+/* Bounce-in effect for the submit button */
+.submit-button {
+    opacity: 0;
+    animation: bounceIn 1.5s ease-out forwards 1s; /* Delays the bounce-in by 2s to allow form slide-in first */
+}
+
+/* Bounce-in animation keyframes */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+/* Slide-in from the right for the entire form */
+.animated-form {
+    opacity: 0;
+    animation: slideInRight 2s ease-out forwards;
+}
+
+/* Slide-in from right animation keyframes */
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);  /* Start off-screen to the right */
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);  /* End at the original position */
+        opacity: 1;
+    }
+}
+
+/* Gradient color effect for button */
+.submit-button {
+    opacity: 0;
+    animation: bounceIn 1.5s ease-out forwards 2s; /* Delays the bounce-in by 2s to allow form slide-in first */
+    background: linear-gradient(to right, blue, purple);  /* One-time color gradient */
+}
+
+/* Bounce-in effect for the submit button */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Additional hover effect for the button */
+.submit-button:hover {
+    transform: scale(1.05);  /* Slight scale-up on hover */
+    background: linear-gradient(to left, blue, purple);  /* On hover, the gradient direction reverses */
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+
+    </style>
+    
+</head>
+<body class="bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center h-screen">
+  <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-lg border border-gray-200">
+      <h1 class="animated-title text-2xl font-bold text-center mb-4">
+    <span class="half-gradient">Welcome to</span> 
+    <span class="other-half-gradient">GDSC Dev Team Test</span>
+    <form id="submissionForm" class="animated-form mb-4">
+        <input type="text" id="userInput" placeholder="Enter your text" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6">
+        <button type="submit" class="submit-button w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded-xl shadow-md hover:bg-gradient-to-l transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center">
+            <span>Submit</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" class="w-6 h-6 ml-2">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+        </button>
+    </form>
+    
+
+      <div id="submissions"></div>
+  </div>
+  <script>
+    document.getElementById('submissionForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Get the value from the input box
+        const userInput = document.getElementById('userInput').value;
+
+        // Clear the input box after submission
+        document.getElementById('userInput').value = '';
+
+        // Create a new div to display the submission
+
+        // Append the new submission to the submissions div
+        
+        // Optionally save the submission in localStorage (or later to a backend)
+        const existingSubmissions = JSON.parse(localStorage.getItem('submissions')) || [];
+        existingSubmissions.push(userInput);
+        localStorage.setItem('submissions', JSON.stringify(existingSubmissions));
+    });
+
+    // Load submissions from localStorage on page load
+    window.onload = function() {
+        const savedSubmissions = JSON.parse(localStorage.getItem('submissions')) || [];
+        savedSubmissions.forEach(submission => {
+            const submissionItem = document.createElement('div');
+            submissionItem.className = 'submission-item';
+            submissionItem.textContent = submission;
+            document.getElementById('submissions').appendChild(submissionItem);
+        });
+    }
+</script>
+
+</body>
+</html>
+
+</body>
